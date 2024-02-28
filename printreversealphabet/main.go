@@ -7,5 +7,5 @@ func main() {
 	for i := x; i >= 97; i-- {
 		z01.PrintRune(i)
 	}
-	z01.PrintRune(10)
+	z01.PrintRune('\n')
 }
