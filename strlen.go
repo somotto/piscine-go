@@ -1,5 +1,5 @@
 package piscine
 
-func StrLens(s string) int {
-  return len([]rune(s))
+func StrLen(s string) int {
+    return len([]rune(s))
 }
