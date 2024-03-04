@@ -6,7 +6,7 @@ func IterativeFactorial(nb int) int {
 		return 0
 	}
 	for i := 1; i <= nb; i++ {
-		if result > (1 << 31) {
+		if result > (1 << 32) {
 			return 0
 		}
 		result *= i
