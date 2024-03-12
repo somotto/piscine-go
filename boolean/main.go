@@ -7,6 +7,7 @@ import (
 )
 
 const EvenMsg string = "I have an even number of arguments"
+
 const OddMsg string = "I have an odd number of arguments"
 
 func printStr(s string) {
@@ -15,6 +16,7 @@ func printStr(s string) {
 	}
 	z01.PrintRune('\n')
 }
+
 func even(nbr int) bool {
 	if nbr%2 == 0 {
 		return true
