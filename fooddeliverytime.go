@@ -11,13 +11,10 @@ var menu = map[string]food{
 }
 
 func FoodDeliveryTime(order string) int {
-	totalprepTime := 0
-	for _, item := range order {
-		foodItem := string(item)
-		if menu[foodItem].preptime == 0 {
-			return -1
-		}
-		totalprepTime += menu[foodItem].preptime
+	item, found := menu[order]
+	if found {
+		return item.preptime
+	} else {
+		return 404
 	}
-	return totalprepTime
 }
