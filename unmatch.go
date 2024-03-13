@@ -1,16 +1,13 @@
 package piscine
 
 func Unmatch(a []int) int {
-	for i := range a {
-		result := -1
-		for j := range a {
-			if i != j && a[i] == a[j] {
-				result = i
-				break
-			}
-		}
-		if result != -1 {
-			return a[result]
+	counts := make([]int, len(a))
+	for _, num := range a {
+		counts[num]++
+	}
+	for i, count := range counts {
+		if count%2 != 0 {
+			return a[i]
 		}
 	}
 	return -1
