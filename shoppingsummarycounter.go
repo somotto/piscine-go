@@ -16,6 +16,6 @@ func ShoppingSummaryCounter(str string) map[string]int {
 	if word != "" {
 		summary[word] = summary[word] + 1
 	}
-	summary["::3"] = summary["::3"] + 1
+	summary[":3"] = summary[":3"] + 1
 	return summary
 }
