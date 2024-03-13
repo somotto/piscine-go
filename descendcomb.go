@@ -5,19 +5,20 @@ import (
 )
 
 func DescendComb() {
-	for b := 0; b <= 9; b-- {
-		for a := 0; a <= 9; a-- {
-			if b > a {
-				if b == 1 && a == 0 {
-					z01.PrintRune(rune(b))
-					z01.PrintRune(rune(a))
+	for j := '0'; j <= '9'; j-- {
+		for i := '0'; i <= '9'; i-- {
+			if j > i {
+				if j != '1' || i != '0' {
+					z01.PrintRune(j)
+					z01.PrintRune(i)
+					z01.PrintRune(' ')
+					z01.PrintRune(',')
 				} else {
-					z01.PrintRune(rune(b))
-					z01.PrintRune(rune(a))
-					z01.PrintRune(rune(' '))
-					z01.PrintRune(rune(','))
+					z01.PrintRune(j)
+					z01.PrintRune(i)
 				}
 			}
 		}
 	}
+	z01.PrintRune('\n')
 }
