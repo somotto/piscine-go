@@ -10,5 +10,5 @@ func JumpOver(str string) string {
 			result += string(char)
 		}
 	}
-	return result
+	return result + "\n"
 }
