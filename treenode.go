@@ -1,7 +1,8 @@
 package piscine
 
 type TreeNode struct {
-	Data  string
-	Left  *TreeNode
-	Right *TreeNode
+	Data   string
+	Parent *TreeNode
+	Left   *TreeNode
+	Right  *TreeNode
 }
