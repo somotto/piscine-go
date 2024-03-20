@@ -4,9 +4,9 @@ func BTreeSearchItem(root *TreeNode, elem string) *TreeNode {
 	if root == nil || root.Data == elem {
 		return root
 	}
-	leftResult := BTreeSearchItem(root.Left, elem)
-	if leftResult != nil {
-		return leftResult
+	if elem < root.Data {
+		return BTreeSearchItem(root.Left, elem)
+	} else {
+		return BTreeSearchItem(root.Right, elem)
 	}
-	return BTreeSearchItem(root.Right, elem)
 }
