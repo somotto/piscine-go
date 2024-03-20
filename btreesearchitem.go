@@ -6,9 +6,11 @@ func BTreeSearchItem(root *TreeNode, elem string) *TreeNode {
 	}
 	if elem == root.Data {
 		return root
-	} else if elem < root.Data {
-		return BTreeSearchItem(root.Left, elem)
-	} else {
-		return BTreeSearchItem(root.Right, elem)
 	}
+	leftResult := BTreeSearchItem(root.Left, elem)
+	if leftResult != nil {
+		return leftResult
+	}
+	rightResult := BTreeSearchItem(root.Right, elem)
+	return rightResult
 }
