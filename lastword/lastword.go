@@ -11,31 +11,17 @@ func main() {
 }
 
 func LastWord(s string) string {
-    // Trim trailing spaces
-    s = trimTrailingSpaces(s)
+	lastWord := ""
+	inWord := false
 
-    // If the string is empty after trimming, return a newline
-    if s == "" {
-        return "\n"
-    }
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] != ' ' {
+			inWord = true
+			lastWord = string(s[i]) + lastWord
+		} else if inWord {
+			break
+		}
+	}
 
-    // Find the last word
-    lastSpaceIndex := -1
-    for i := len(s) - 1; i >= 0; i-- {
-        if s[i] == ' ' {
-            lastSpaceIndex = i
-            break
-        }
-    }
-
-    // Return the last word followed by a newline
-    return s[lastSpaceIndex+1:] + "\n"
-}
-
-func trimTrailingSpaces(s string) string {
-    end := len(s) - 1
-    for end >= 0 && s[end] == ' ' {
-        end--
-    }
-    return s[:end+1]
+	return lastWord + "\n"
 }
