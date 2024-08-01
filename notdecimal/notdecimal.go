@@ -6,17 +6,20 @@ import (
 )
 
 func main() {
-	fmt.Println(NotDecimal("0.00000000000000000000000000000000000000001"))
-	fmt.Println(NotDecimal("174.2"))
-	fmt.Println(NotDecimal("0.1255"))
-	fmt.Println(NotDecimal("1.20525856"))
-	fmt.Println(NotDecimal("-0.0f00d00"))
-	fmt.Println(NotDecimal(""))
-	fmt.Println(NotDecimal("-0000000000000000000000000019.525856"))
-	fmt.Println(NotDecimal("1952"))
+	fmt.Print(NotDecimal("0.00000000000000000000000000000000000000001"))
+	fmt.Print(NotDecimal("174.2"))
+	fmt.Print(NotDecimal("0.1255"))
+	fmt.Print(NotDecimal("1.20525856"))
+	fmt.Print(NotDecimal("-0.0f00d00"))
+	fmt.Print(NotDecimal(""))
+	fmt.Print(NotDecimal("-0000000000000000000000000019.525856"))
+	fmt.Print(NotDecimal("1952"))
 }
 
 func NotDecimal(dec string) string {
+	if dec == "" {
+		return "\n\n"
+	}
 	newdec := ""
 	for _, v := range dec {
 		if v != '.' {
@@ -28,5 +31,5 @@ func NotDecimal(dec string) string {
 		}
 	}
 	n, _ := strconv.Atoi(newdec)
-	return strconv.Itoa(n)
+	return strconv.Itoa(n) + "\n"
 }
