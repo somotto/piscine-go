@@ -6,8 +6,6 @@ import (
 	"github.com/01-edu/z01"
 )
 
-
-
 func main() {
 	if len(os.Args[1:]) == 0 {
 		return

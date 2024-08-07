@@ -6,7 +6,6 @@ import (
 	"github.com/01-edu/z01"
 )
 
-
 func main() {
 	args := os.Args
 	if len(args) != 3 {
