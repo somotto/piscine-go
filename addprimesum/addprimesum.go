@@ -6,39 +6,39 @@ import (
 	"strconv"
 )
 
-func sumPrimesUpTo(n int) int {
-	if n < 2 {
-		return 0
-	}
+func isPrime(n int) bool {
+    if n <= 1 {
+        return false
+    }
+    for i := 2; i*i <= n; i++ {
+        if n%i == 0 {
+            return false
+        }
+    }
+    return true
+}
 
-	isPrime := make([]bool, n+1)
-	for i := range isPrime {
-		isPrime[i] = true
-	}
-
-	sum := 0
-	for i := 2; i <= n; i++ {
-		if isPrime[i] {
-			sum += i
-			for j := i * i; j <= n; j += i {
-				isPrime[j] = false
-			}
-		}
-	}
-	return sum
+func sumPrimes(n int) int {
+    sum := 0
+    for i := 2; i <= n; i++ {
+        if isPrime(i) {
+            sum += i
+        }
+    }
+    return sum
 }
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Println(0)
-		return
-	}
+    if len(os.Args) != 2 {
+        fmt.Println(0)
+        return
+    }
 
-	n, err := strconv.Atoi(os.Args[1])
-	if err != nil || n <= 0 {
-		fmt.Println(0)
-		return
-	}
+    n, err := strconv.Atoi(os.Args[1])
+    if err != nil || n <= 0 {
+        fmt.Println(0)
+        return
+    }
 
-	fmt.Println(sumPrimesUpTo(n))
+    fmt.Println(sumPrimes(n))
 }
