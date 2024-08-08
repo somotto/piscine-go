@@ -1,56 +1,70 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+// WordFlip reverses the order of words in a string
+func WordFlip(str string) string {
+	// Step 1: Trim leading and trailing spaces
+	start := 0
+	end := len(str) - 1
+
+	// Find the start index of the first non-space character
+	for start <= end && (str[start] == ' ' || str[start] == '\t') {
+		start++
+	}
+
+	// Find the end index of the last non-space character
+	for end >= start && (str[end] == ' ' || str[end] == '\t') {
+		end--
+	}
+
+	// If the resulting string is empty
+	if start > end {
+		return "Invalid Output\n"
+	}
+
+	// Step 2: Normalize multiple spaces between words
+	trimmedStr := ""
+	inWord := false
+	for i := start; i <= end; i++ {
+		if str[i] == ' ' || str[i] == '\t' {
+			if inWord {
+				trimmedStr += " "
+				inWord = false
+			}
+		} else {
+			trimmedStr += string(str[i])
+			inWord = true
+		}
+	}
+
+	// Step 3: Reverse the order of words
+	words := []string{}
+	start = 0
+	for i := 0; i <= len(trimmedStr); i++ {
+		if i == len(trimmedStr) || trimmedStr[i] == ' ' {
+			if start < i {
+				words = append(words, trimmedStr[start:i])
+			}
+			start = i + 1
+		}
+	}
+
+	reversedStr := ""
+	for i := len(words) - 1; i >= 0; i-- {
+		if i < len(words)-1 {
+			reversedStr += " "
+		}
+		reversedStr += words[i]
+	}
+
+	return reversedStr + "\n"
+}
 
 func main() {
+	// Example test cases
 	fmt.Print(WordFlip("First second last"))
 	fmt.Print(WordFlip(""))
 	fmt.Print(WordFlip("     "))
 	fmt.Print(WordFlip(" hello  all  of  you! "))
-}
-
-func WordFlip(str string) string {
-	if len(str) == 0 {
-		return "Invalid Output\n"
-	}
-
-	// Trim leading and trailing spaces
-	start, end := 0, len(str)-1
-	for start < len(str) && str[start] == ' ' {
-		start++
-	}
-	for end >= 0 && str[end] == ' ' {
-		end--
-	}
-	if start > end {
-		return "\n"
-	}
-
-	// Split into words and reverse
-	words := []string{}
-	word := ""
-	for i := start; i <= end; i++ {
-		if str[i] != ' ' {
-			word += string(str[i])
-		} else if word != "" {
-			words = append([]string{word}, words...)
-			word = ""
-		}
-	}
-	if word != "" {
-		words = append([]string{word}, words...)
-	}
-
-	// Join words
-	result := ""
-	for i, w := range words {
-		if i > 0 {
-			result += " "
-		}
-		result += w
-	}
-
-	return result + "\n"
 }

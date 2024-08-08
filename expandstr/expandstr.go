@@ -8,41 +8,45 @@ import (
 
 func main() {
 	if len(os.Args) != 2 {
-		z01.PrintRune('\n')
 		return
 	}
 
 	input := os.Args[1]
 
-	// Remove leading spaces and tabs
+	// Trim leading spaces and tabs
 	start := 0
 	for start < len(input) && (input[start] == ' ' || input[start] == '\t') {
 		start++
 	}
 
-	// Remove trailing spaces and tabs
+	// Trim trailing spaces and tabs
 	end := len(input) - 1
 	for end >= start && (input[end] == ' ' || input[end] == '\t') {
 		end--
 	}
 
-	// If the resulting string is empty, print a newline and return
+	// If the resulting string is empty, return without printing anything
 	if start > end {
-		z01.PrintRune('\n')
 		return
 	}
 
-	// Print words with a single space between them
+	// Print words with exactly three spaces between them
 	space := false
+	wordCount := 0
 	for i := start; i <= end; i++ {
 		if input[i] == ' ' || input[i] == '\t' {
 			space = true
 		} else {
-			if space {
+			if space && wordCount > 0 {
+				z01.PrintRune(' ')
+				z01.PrintRune(' ')
 				z01.PrintRune(' ')
 				space = false
 			}
 			z01.PrintRune(rune(input[i]))
+			if !space {
+				wordCount++
+			}
 		}
 	}
 	z01.PrintRune('\n')
