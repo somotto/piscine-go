@@ -30,9 +30,9 @@ func FifthAndSkip(str string) string {
 	}
 
 	// Trim trailing space if it exists
-	if len(result) > 0 && result[len(result)-1] == ' ' {
-		result = result[:len(result)-1]
-	}
+	// if len(result) > 0 && result[len(result)-1] == ' ' {
+	// 	result = result[:len(result)-1]
+	// }
 
 	return result + "$\n"
 }
