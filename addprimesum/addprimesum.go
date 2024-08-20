@@ -2,8 +2,20 @@ package main
 
 import (
 	"os"
+
 	"github.com/01-edu/z01"
 )
+
+func atoi(s string) int {
+	num := 0
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return 0
+		}
+		num = num*10 + int(c-'0')
+	}
+	return num
+}
 
 func isPrime(n int) bool {
 	if n <= 1 {
@@ -27,52 +39,35 @@ func sumPrimes(n int) int {
 	return sum
 }
 
-func printInt(n int) {
-	if n == 0 {
-		z01.PrintRune('0')
-		z01.PrintRune('\n')
-		return
+func itoa(n int) string {
+	if n <= 0 {
+		return "0"
 	}
-	if n < 0 {
-		z01.PrintRune('-')
-		n = -n
-	}
-
-	var digits []rune
+	var digits []byte
 	for n > 0 {
-		digits = append(digits, rune('0'+n%10))
+		digits = append(digits, byte(n%10)+'0')
 		n /= 10
 	}
-
-	for i := len(digits) - 1; i >= 0; i-- {
-		z01.PrintRune(digits[i])
+	for i,j := 0, len(digits) -1; i<j; i,j = i+1,j-1 {
+		digits[i], digits[j] = digits[j], digits[i]
 	}
-	z01.PrintRune('\n')
-}
-
-func atoi(s string) (int, bool) {
-	num := 0
-	for _, c := range s {
-		if c < '0' || c > '9' {
-			return 0, false
-		}
-		num = num*10 + int(c-'0')
-	}
-	return num, true
+	return string(digits)
 }
 
 func main() {
 	if len(os.Args) != 2 {
-		printInt(0)
+		z01.PrintRune('0')
+		z01.PrintRune('\n')
 		return
 	}
 
-	n, ok := atoi(os.Args[1])
-	if !ok || n <= 0 {
-		printInt(0)
-		return
-	}
+	n:= atoi(os.Args[1])
+	sum := sumPrimes(n)
+	printint := itoa(sum)
 
-	printInt(sumPrimes(n))
+	for _, v := range printint {
+		z01.PrintRune(v)
+	}
+	z01.PrintRune('\n')
 }
 
