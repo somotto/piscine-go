@@ -19,27 +19,18 @@ func CamelToSnakeCase(s string) string {
 	}
 
 	result := ""
-	valid := true
 	for i := 0; i < len(s); i++ {
-		if (s[i] < 'A' || s[i] > 'Z') && (s[i] < 'a' || s[i] > 'z') {
-			valid = false
-			break
+		if (i == len(s)-1 && (s[i] >= 'A' && s[i] <= 'Z')) || s[i] >= 'A' && s[i] <= 'Z' && s[i+1] >= 'A' && s[i+1] <= 'Z' {
+			return s
 		}
-		if i > 0 && s[i] >= 'A' && s[i] <= 'Z' {
-			if (i < len(s)-1 && s[i+1] >= 'a' && s[i+1] <= 'z') && 
-			   (s[i-1] >= 'a' && s[i-1] <= 'z') {
-				result += "_"
-			} else if s[i-1] >= 'A' && s[i-1] <= 'Z' {
-				valid = false
-				break
-			}
+		if i < len(s) && !((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')) {
+			return s
+		}
+
+		if i > 0 && s[i] >= 'A' && s[i] <= 'Z' && (s[i-1] >= 'a' && s[i-1] <= 'z') {
+			result += "_"
 		}
 		result += string(s[i])
 	}
-
-	if !valid || result == s {
-		return s
-	}
-
 	return result
 }
