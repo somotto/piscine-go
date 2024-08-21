@@ -6,6 +6,17 @@ import (
 	"github.com/01-edu/z01"
 )
 
+// converts string to an interger
+func atoi(s string) int {
+	res := 0
+	for _, ch := range s {
+		if ch < '0' || ch > '9' {
+			return -1
+		}
+		res = res*10 + int(ch-'0')
+	}
+	return res
+}
 // checks for prime number
 func isPrime(n int) bool {
 	if n < 2 {
@@ -35,35 +46,35 @@ func primeFactors(n int) []int {
 	return factors
 }
 
-// converts string to an interger
-func atoi(s string) int {
-	res := 0
-	for _, ch := range s {
-		if ch < '0' || ch > '9' {
-			return -1
-		}
-		res = res*10 + int(ch-'0')
-	}
-	return res
-}
 
 // prints an integer digit by digit using z01.PrintRune
-func printNumber(n int) {
+func itoa(n int) string {
 	if n == 0 {
-		z01.PrintRune('0')
-		return
+		return "0"
 	}
-
-	digits := []rune{}
+	negative := false 
+	if n < 0 {
+		negative = true
+		n = -n
+	}
+	var digits []byte
 	for n > 0 {
-		digits = append([]rune{rune(n%10 + '0')}, digits...)
-		n /= 10
+		digits = append(digits, byte(n%10) + '0')
+		n/=10
 	}
-	for _, digit := range digits {
-		z01.PrintRune(digit)
+	for i,j := 0,len(digits)-1;i < j;i,j = i+1,j-1 {
+		digits[i], digits[j] = digits[j], digits[i]
+	} 
+	if negative {
+		digits = append([]byte{'-'}, digits...)
 	}
+	return string(digits)
 }
-
+//read command line args
+//convert commandline arg(string) to int(Atoi)
+// Isprime func then Primefactors
+// if factors are more than 0, range over them printing * in between
+// then convert fprimes(int) to str(Itoa), print them
 func main() {
 	if len(os.Args) != 2 {
 		return
@@ -81,7 +92,10 @@ func main() {
 			if i != 0 {
 				z01.PrintRune('*')
 			}
-			printNumber(factor)
+			number:= itoa(factor)
+			for _,v := range number {
+				z01.PrintRune(v)
+			}
 		}
 		z01.PrintRune('\n')
 	}
