@@ -11,25 +11,23 @@ func main() {
 	fmt.Println(ZipString("Helloo Therre!"))
 }
 
+
 func ZipString(s string) string {
 	if len(s) == 0 {
 		return ""
 	}
-
-	res := ""
+	Newstr := ""
 	count := 1
-	current := s[0]
 
-	for i := 1; i < len(s); i++ {
-		if s[i] == current {
+	for i:= 1; i < len(s); i++ {
+		if s[i] == s[i-1] {
 			count++
 		} else {
-			res += strconv.Itoa(count) + string(current)
-			current = s[i]
+			Newstr += strconv.Itoa(count) + string(s[i-1])
 			count = 1
 		}
 	}
-
-	res += strconv.Itoa(count) + string(current)
-	return res
+	Newstr += strconv.Itoa(count) + string(s[len(s)-1])
+	return Newstr
 }
+
