@@ -24,10 +24,10 @@ func PrintMemory(arr [10]byte) {
 		}
 	}
 	for _, v := range arr {
-		if v >= 32 && v <= 126 {
-			z01.PrintRune(rune(v))
-		} else {
+		if v <= 32 || v > 126 {
 			z01.PrintRune('.')
+			} else {
+			z01.PrintRune(rune(v))
 		}
 	}
 	z01.PrintRune('\n')
